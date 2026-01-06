@@ -1,46 +1,31 @@
-version: "3.8"
-
 services:
   backend:
-    image: yourdockerhubusername/backend:staging
+    image: praghavi123/backend:staging
     container_name: backend-staging
-    restart: always
-    env_file:
-      - .env.staging
     ports:
       - "5000:5000"
+    env_file:
+      - .env.staging
     depends_on:
       - db
-    networks:
-      - appnet
 
   frontend:
-    image: yourdockerhubusername/frontend:staging
+    image: praghavi123/frontend:staging
     container_name: frontend-staging
-    restart: always
     ports:
       - "8080:80"
     depends_on:
       - backend
-    networks:
-      - appnet
 
   db:
     image: postgres:15
     container_name: db-staging
-    restart: always
     environment:
       POSTGRES_DB: appdb
       POSTGRES_USER: appuser
       POSTGRES_PASSWORD: apppassword
     volumes:
       - db_data:/var/lib/postgresql/data
-    networks:
-      - appnet
-
-networks:
-  appnet:
-    driver: bridge
 
 volumes:
   db_data:
