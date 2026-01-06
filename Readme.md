@@ -1,114 +1,203 @@
-                                                   **CI/CD Pipeline for Dockerized Web Application**
+             **CI/CD Pipeline for Dockerized Web Application**
 
-**Project Overview:**
-This project demonstrates a complete CI/CD pipeline for a 2-tier web application using Docker, Docker Compose, and GitHub Actions. The pipeline automatically builds, tests, scans, pushes, and deploys the application to a staging environment.
+**Project Overview**
 
-**Architecture Overview:**
-Application Architecture 
-* Frontend: Static web application served via NGINX
-* Backend: Python Flask API
-* Database: PostgreSQL
+This project demonstrates a complete **end-to-end CI/CD pipeline** for a simple **2-tier web application** using **Docker** and **GitHub Actions**. 
+The pipeline automatically:
+* Builds Docker images
+* Runs basic tests
+* Performs container security scanning
+* Pushes images to Docker Hub
+* Deploys the application to a **staging environment** using Docker Compose
 
-**Infrastructure Components:**
-* Docker (containerization)
-* Docker Compose (local & staging orchestration)
-* GitHub Actions (CI/CD)
-* Docker Hub (image registry)
+---
 
-**Architecture Diagram**
-User
-|
-v
-Frontend 
-|
-v
+ **Architecture**
+
+**Application Architecture**
+
+```
+Browser
+   |
+Frontend (Nginx + Static HTML)
+   |
 Backend (Flask API)
-|
-v
+   |
 PostgreSQL Database
+```
 
-**Project Structure**
-CICD-WEBAPPLICATION/
-│
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml
-│
+ **CI/CD Flow**
+
+```
+Developer Push → GitHub
+        ↓
+GitHub Actions CI
+        ↓
+Build Docker Images
+        ↓
+Run Tests
+        ↓
+Security Scan (Trivy)
+        ↓
+Push Images to Docker Hub
+        ↓
+Deploy to Staging Server
+```
+
+---
+
+ **Project Structure**
+
+```
+CICD-WEBAPPLICATION
+├── .github/workflows/
+│   └── ci-cd.yml
 ├── backend/
 │   ├── app.py
 │   ├── Dockerfile
 │   └── requirements.txt
-│
 ├── frontend/
 │   ├── Dockerfile
 │   └── index.html
-│
 ├── scripts/
 │   ├── deploy.sh
 │   └── verify.sh
-│
 ├── .env
-│
+├── .env.staging
 ├── docker-compose.yml
 ├── docker-compose-staging.yml
-│
-├── README.md
+└── README.md
+```
 
+---
+
+**Technology Stack**
+
+| Component     | Technology     |
+| ------------- | -------------- |
+| Frontend      | HTML + Nginx   |
+| Backend       | Python (Flask) |
+| Database      | PostgreSQL     |
+| Containers    | Docker         |
+| Orchestration | Docker Compose |
+| CI/CD         | GitHub Actions |
+| Security      | Trivy          |
+| Registry      | Docker Hub     |
+
+---
 
 **Docker Implementation**
-Backend Dockerfile
+
+ **Backend Dockerfile (Highlights)**
+
 * Multi-stage build
-* Slim base image
-* Non-root user
-* Layer caching
+* Lightweight Python base image
+* Non-root user for security
+* Environment variable support
 
-**Frontend Dockerfile**
-* NGINX Alpine image
-* Static content served efficiently
+ **Frontend Dockerfile (Highlights)**
 
-**Image Optimization**
-image               	Before	     After
-Backend	              ~900MB	    ~120MB
-Frontend	            ~150MB	    ~25MB
+* Multi-stage build
+* Nginx-based static serving
+* Optimized image size
 
-**Docker Compose**
-Local Development
-  *docker-compose up --build
-Staging Environment
-   *docker compose -f docker-compose.staging.yml up -d
+---
+
+** Environment Configuration**
+
+ **`.env` (Local Development)**
+
+```
+DB_HOST=db
+DB_NAME=appdb
+DB_USER=postgres
+DB_PASSWORD=postgres
+```
+
+ **`.env.staging`**
+
+```
+DB_HOST=db
+DB_NAME=appdb
+DB_USER=postgres
+DB_PASSWORD=postgres
+DOCKERHUB_USERNAME=praghavi123
+```
+
+---
+
+ **Local Development**
+
+**Start Application Locally**
+
+```bash
+docker compose up --build
+```
+
+**Access Application**
+
+* Frontend: [http://localhost:8080](http://localhost:8080)
+* Backend: [http://localhost:5000](http://localhost:5000)
+* Health Check: [http://localhost:5000/health](http://localhost:5000/health)
+
+---
 
 **CI/CD Pipeline (GitHub Actions)**
-    Pipeline Trigger
-      Triggered on push to main branch
-**Pipeline Stages**
-Checkout Code
-Build Docker Images
-Run Unit Tests Inside Containers
-Security Scan with Trivy
-Tag & Push Images to Docker Hub
-Deploy to Staging Environment
-**Secrets Management**
-GitHub Secrets used:
-* DOCKER_USERNAME
-* DOCKER_PASSWORD
-Secrets are never hardcoded in the repository.
 
-**Deployment Process (Staging):**
+ **Pipeline Stages**
 
-Pull latest images from Docker Hub
-Stop old containers
-Start new containers
-Run database migrations (if any)
-Perform health check
-Health Endpoint:
- GET /health
-**Verification**
-Backend Health: http://localhost:5000/health
-Frontend: http://localhost:8080
+1. Checkout code
+2. Build Docker images
+3. Run container tests
+4. Scan images using Trivy
+5. Push images to Docker Hub
+6. Deploy to staging environment
 
-**Deployment Script**
-#!/bin/bash
-docker pull yourdockerhub/backend:staging
-docker pull yourdockerhub/frontend:staging
-docker compose -f docker-compose.staging.yml down
-docker compose -f docker-compose.staging.yml up -d
+ **Required GitHub Secrets**
+
+```
+DOCKER_USERNAME
+DOCKER_PASSWORD
+```
+
+---
+
+ **Staging Deployment**
+
+ **Deploy Manually**
+
+```bash
+chmod +x scripts/deploy.sh
+./scripts/deploy.sh
+```
+
+**Verify Deployment**
+
+```bash
+chmod +x scripts/verify.sh
+./scripts/verify.sh
+```
+
+---
+
+ **Troubleshooting**
+
+ **Frontend Not Loading**
+
+* Ensure port `8080:80` is exposed
+* Check frontend container status
+
+ **Docker Image Pull Errors**
+
+* Verify DockerHub username
+* Run `docker login`
+
+ **Pipeline Fails at Login**
+
+* Ensure GitHub secrets are set correctly
+
+---
+
+
+
+
