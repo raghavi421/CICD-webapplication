@@ -1,8 +1,8 @@
-             **CI/CD Pipeline for Dockerized Web Application**
+                               CI/CD Capstone Project
+---
+1.Project Overview
 
-**Project Overview**
-
-This project demonstrates a complete **end-to-end CI/CD pipeline** for a simple **2-tier web application** using **Docker** and **GitHub Actions**. 
+ This project demonstrates a complete **end-to-end CI/CD pipeline** for a simple **2-tier web application** using    **Docker** and **GitHub Actions**. 
 The pipeline automatically:
 * Builds Docker images
 * Runs basic tests
@@ -12,41 +12,47 @@ The pipeline automatically:
 
 ---
 
- **Architecture**
+2.Problem statement
 
-**Application Architecture**
-
-```
-Browser
-   |
-Frontend (Nginx + Static HTML)
-   |
-Backend (Flask API)
-   |
-PostgreSQL Database
-```
-
- **CI/CD Flow**
-
-```
-Developer Push → GitHub
-        ↓
-GitHub Actions CI
-        ↓
-Build Docker Images
-        ↓
-Run Tests
-        ↓
-Security Scan (Trivy)
-        ↓
-Push Images to Docker Hub
-        ↓
-Deploy to Staging Server
-```
+Build a complete CI/CD system that automatically tests, builds, and deploys a simple web application through  staging  environment using Docker and Docker compose.
 
 ---
 
- **Project Structure**
+3.Application Architecture
+---
+1. Frontend
+   * Static HTML-based web application
+   * Acts as the user interface for the system
+   * Displays:
+           * Application health status
+           * Database connection status
+           * Total record count
+           * Employee data table
+ 2. backend
+    * RESTful API developed using Flask
+    * Provides endpoints:
+               /health – application health
+               /db-status – database status and employee records
+    * Uses environment variables for database connection
+3. database
+   * PostgreSQL container
+   * Stores employee records
+   * Persistent volume for data durability
+---
+
+4.Project Architecture
+
+- The application follows a 2-tier architecture with CI/CD automation.
+- Architecture Flow:
+     * Developer pushes code to GitHub
+     * Github actions automatically develop CI/CD pipeline
+     * CI/CD  pipeline builds, tests, scans, and pushes images
+     * CI/CD pipeline deploys application to target environment
+     * Frontend communicates with backend
+     * Backend interacts with PostgreSQL database
+ ---
+
+ 5. Project Structure
 
 ```
 CICD-WEBAPPLICATION
@@ -71,7 +77,7 @@ CICD-WEBAPPLICATION
 
 ---
 
-**Technology Stack**
+6.Technology Stack
 
 | Component     | Technology     |
 | ------------- | -------------- |
@@ -85,6 +91,21 @@ CICD-WEBAPPLICATION
 | Registry      | Docker Hub     |
 
 ---
+
+7. Tools & Technologies Used
+
+   1. Github
+      Purpose: Source code management Usage in Project
+       * Stores application source code
+       * Triggers CI/CD pipeline using GitHub actions
+   2. Docker
+      Purpose: Containerization platform Usage in Project
+        * Containerizes frontend, backend, database, and github actions
+        * Ensures consistency across environments
+        * Used in Jenkins pipeline for image build, push, and deployment
+   3. Docker Compose
+      Purpose: Multi-container orchestration Usage in Project
+         
 
 **Docker Implementation**
 
