@@ -138,6 +138,7 @@ docker compose up --build
 
 * Frontend: [http://localhost:8080](http://localhost:8080)
 * Backend: [http://localhost:5000](http://localhost:5000)
+  output:![backend output](https://github.com/raghavi421/CICD-webapplication/blob/20ed083ed2d7f940675391cd6f31d77214203df6/images/backend%20output.png)
 * Health Check: [http://localhost:5000/health](http://localhost:5000/health)
 
 ---
