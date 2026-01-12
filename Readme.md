@@ -110,7 +110,7 @@ Backend Response
      * Backend interacts with PostgreSQL database
  
  ### The Complete System Architecture
- ![backup](https://github.com/PavanSPK/Automated_Backup_System_Project/blob/main/test_folder/backup.png)
+ ![CICD pipeline flow](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
 
 ### Github Actions Pipeline Architecture
  ---
