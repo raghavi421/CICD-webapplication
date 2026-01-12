@@ -283,6 +283,7 @@ Trivy is integrated into the pipeline as a mandatory gate.
 - Backend and frontend images are pushed separately
 - Docker Hub access token is used (no plaintext credentials)
 - Images are versioned and reusable across environments
+   ![dockerhub image](https://github.com/raghavi421/CICD-webapplication/blob/7ac1e58f91e8bd9e29ac3389c336dc2c6c1f27b4/images/dockerhub%20image.png))
 ---
 ### 14. Environment Mapping Explanation
 Although the same Docker Compose configuration is reused, logical environments are clearly defined through execution context and process separation.
@@ -333,7 +334,8 @@ Run Health Check
      v
 Deployment SUCCESS / FAILURE
 ```
------------------------------------------------
+---
+
 ### 17.Troubleshooting Guide
 This section lists common issues encountered during local execution or CI/CD pipeline runs, along with quick resolutions.
 
