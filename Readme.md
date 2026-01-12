@@ -1,4 +1,4 @@
-                               CI/CD Capstone Project
+                                 CI/CD Capstone Project
 ---
 ### 1.Project Overview
 
@@ -28,16 +28,74 @@ Build a complete CI/CD system that automatically tests, builds, and deploys a si
            * Database connection status
            * Total record count
            * Employee data table
+
+ ```
+     User Browser
+     |
+     |  HTTP Request (Port 80)
+     v
+Frontend Container (Nginx)
+     |
+     |  Serves static HTML 
+     v
+index.html
+     |
+     |  fetch()
+     v
+Backend API (/health, /db-status)
+     |
+     v
+Render Status & Data in UI
+
+```
  2. backend
     * RESTful API developed using Flask
     * Provides endpoints:
                /health – application health
                /db-status – database status and employee records
     * Uses environment variables for database connection
+```
+Frontend Request
+      |
+      |  HTTP Request (Port 5000)
+      v
+Backend Container (Flask)
+      |
+      |  /health endpoint
+      |---------------------> Returns "OK"
+      |
+      |  /db-status endpoint
+      v
+Connect to Database
+      |
+      v
+Query Employee Records
+      |
+      v
+JSON Response to Frontend
+```
 3. database
    * PostgreSQL container
    * Stores employee records
    * Persistent volume for data durability
+```
+Backend Container
+      |
+      |  SQL Query
+      v
+PostgreSQL Container
+      |
+      |  Authentication
+      v
+employees Table
+      |
+      |  Fetch Records
+      v
+Result Set
+      |
+      v
+Backend Response
+```
 ---
 
 ### 4.Project Architecture
@@ -50,6 +108,11 @@ Build a complete CI/CD system that automatically tests, builds, and deploys a si
      * CI/CD pipeline deploys application to target environment
      * Frontend communicates with backend
      * Backend interacts with PostgreSQL database
+ 
+ ### The Complete System Architecture
+ ![backup](https://github.com/PavanSPK/Automated_Backup_System_Project/blob/main/test_folder/backup.png)
+
+### Github Actions Pipeline Architecture
  ---
 
 ### 5. Project Structure
@@ -157,11 +220,12 @@ docker-compose up -d
 ```
 ### Step 4: Verify Application
 
-- Frontend UI: http://localhost
-- Backend API: http://localhost:5000
-- Health Endpoint: http://localhost:5000/health
+- Frontend UI: (http://localhost:8080)
+- Backend API: (http://localhost:5000)
+- Health Endpoint: (http://localhost:5000/health)
 
-**Docker Implementation**
+
+### 9. Docker Implementation
 
  **Backend Dockerfile (Highlights)**
 
@@ -178,102 +242,143 @@ docker-compose up -d
 
 ---
 
-** Environment Configuration**
+### 10. Docker Compose Configuration
+docker-compose.yml includes:
 
- **`.env` (Local Development)**
-
-```
-DB_HOST=db
-DB_NAME=appdb
-DB_USER=postgres
-DB_PASSWORD=postgres
-```
-
- **`.env.staging`**
-
-```
-DB_HOST=db
-DB_NAME=appdb
-DB_USER=postgres
-DB_PASSWORD=postgres
-DOCKERHUB_USERNAME=praghavi123
-```
+### Services
+- backend
+- frontend
+- db (PostgreSQL)
+### Features
+- Isolated Docker network
+- Named volume for database persistence
+- Environment variables for database configuration Docker Compose is used both locally and during deployment to ensure environment consistency.
 
 ---
+### 11. CI/CD Pipeline Using Jenkins
+The complete CI/CD workflow is defined in the Jenkinsfile
 
- **Local Development**
-
-**Start Application Locally**
-
-```bash
-docker compose up --build
-```
-
-**Access Application**
-
-* Frontend: [http://localhost:8080](http://localhost:8080)
-* Backend: [http://localhost:5000](http://localhost:5000)
-  output:![backend output](https://github.com/raghavi421/CICD-webapplication/blob/20ed083ed2d7f940675391cd6f31d77214203df6/images/backend%20output.png)
-* Health Check: [http://localhost:5000/health](http://localhost:5000/health)
-
+### Pipeline Stages:
+- Checkout Code
+- Build Docker Images
+- Container Health Test
+- Security Scan (Trivy)
+- Push Images to Docker Hub
+- Deploy to Development
+- Deploy to Staging
+- Manual Approval
+- Deploy to Production
 ---
 
-**CI/CD Pipeline (GitHub Actions)**
-
- **Pipeline Stages**
-
-1. Checkout code
-2. Build Docker images
-3. Run container tests
-4. Scan images using Trivy
-5. Push images to Docker Hub
-6. Deploy to staging environment
-
- **Required GitHub Secrets**
-
-```
-DOCKER_USERNAME
-DOCKER_PASSWORD
-```
-
+### 12. Security Scanning with Trivy
+Trivy is integrated into the pipeline as a mandatory gate.
+- Scans backend image
+- Checks for HIGH and CRITICAL vulnerabilities
+- Pipeline fails immediately if issues are found This step ensures that insecure images are never deployed.
 ---
-
- **Staging Deployment**
-
- **Deploy Manually**
-
-```bash
-chmod +x scripts/deploy.sh
-./scripts/deploy.sh
-```
-
-**Verify Deployment**
-
-```bash
-chmod +x scripts/verify.sh
-./scripts/verify.sh
-```
-
+### 13. Docker Hub Image Registry
+- Backend and frontend images are pushed separately
+- Docker Hub access token is used (no plaintext credentials)
+- Images are versioned and reusable across environments
 ---
+### 14. Environment Mapping Explanation
+Although the same Docker Compose configuration is reused, logical environments are clearly defined through execution context and process separation.
 
- **Troubleshooting**
-
- **Frontend Not Loading**
-
-* Ensure port `8080:80` is exposed
-* Check frontend container status
-
- **Docker Image Pull Errors**
-
-* Verify DockerHub username
-* Run `docker login`
-
- **Pipeline Fails at Login**
-
-* Ensure GitHub secrets are set correctly
-
+### Development Environment
+- Local machine execution
+- Manual docker-compose up
+- Used for development and local testing
+### Staging Environment
+- Jenkins pipeline execution
+- Automated build, test, scan, and validation
+- Acts as a controlled pre-production gate
 ---
+### 15. Continuous Deployment
+- Jenkins pulls latest images
+- Stops old containers
+- Starts new containers
+- Verifies deployment using /health endpoint
+- Production deployment requires manual approval
+---
+### 16. Deployment Script
+deploy.sh performs:
+- Existing containers are stopped
+- Latest images are pulled from Docker Hub
+- New containers are started using Docker Compose
+- No manual deployment steps are required
 
+  Start deploy.sh
+     |
+     v
+Read Environment Argument
+     |
+     v
+Select Correct .env File
+     |
+     v
+Pull Latest Docker Images
+     |
+     v
+Stop Existing Containers
+     |
+     v
+Start New Containers
+     |
+     v
+Run Health Check
+     |
+     v
+Deployment SUCCESS / FAILURE
+```
+-----------------------------------------------
+### 17.Troubleshooting Guide
+This section lists common issues encountered during local execution or CI/CD pipeline runs, along with quick resolutions.
 
+### Containers not starting:
+Symptoms: Containers exit or application is unreachable.
+Fix:
+```
+docker-compose logs
+```
+### Frontend Loads but Backend Fails
+Symptoms: UI loads, API endpoints fail.
+Fix:
+```
+docker-compose logs backend
+docker-compose restart backend
+```
+### Health check failing:
+Symptoms: Github actions pipeline fails at /health check.
+Fix:
+```
+curl http://localhost:5000/health
+```
+Ensure Flask binds to 0.0.0.0 and backend container is running.
+
+### Database Connection Errors
+Symptoms: Backend crashes with DB errors.
+Fix:
+```
+docker-compose logs db
+docker-compose restart db
+```
+Verify database environment variables.
+
+### Trivy Scan Fails Pipeline
+Symptoms: Pipeline stops at security scan.
+Fix: Update base images or dependencies. Failure is expected for HIGH/CRITICAL vulnerabilities.
+
+### Old image still running:
+Symptoms: Latest changes not reflected.
+Fix:
+```
+docker-compose down
+docker-compose pull
+docker-compose up -d
+```
+-------------------------------------------------------------
+### 18.Conclusion
+This capstone project demonstrates an end-to-end CI/CD pipeline using github actions and Docker to automate the complete workflow from code commit to deployment for a containerized web application. By integrating GitHub actions, optimized Docker builds, automated security scanning, and reliable service deployment, the project follows real-world DevOps practices and validates a stable frontend–backend–database integration in a production-like environment.
+-------------------------------------------------------------------------
 
 
