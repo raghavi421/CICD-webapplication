@@ -169,10 +169,10 @@ CICD-WEBAPPLICATION
         - Ensures consistency across environments
         - Used in Jenkins pipeline for image build, push, and deployment
    ### 3. Docker Compose
-      Purpose: Multi-container orchestration Usage in Project
-- Defines frontend, backend, and database services
-- Creates shared networks and persistent volumes
-- Used for local development, testing, and deployment
+Purpose: Multi-container orchestration Usage in Project
+   - Defines frontend, backend, and database services
+   - Creates shared networks and persistent volumes
+   - Used for local development, testing, and deployment
 ### 4. Nginx
 Purpose: Web server.  Usage in Project:
 - Serves static frontend files
@@ -270,6 +270,7 @@ The complete CI/CD workflow is defined in the Jenkinsfile
 - Deploy to Staging
 - Manual Approval
 - Deploy to Production
+  ![backup](https://github.com/PavanSPK/Automated_Backup_System_Project/blob/main/test_folder/backup.png)
 ---
 
 ### 12. Security Scanning with Trivy
