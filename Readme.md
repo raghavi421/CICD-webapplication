@@ -113,6 +113,8 @@ Backend Response
  ![CICD pipeline flow](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
 
 ### Github Actions Pipeline Architecture
+ ![CICD pipeline ](https://github.com/raghavi421/CICD-webapplication/blob/5b54b5d86c58853a1570dd7fcc61daa5861e594c/images/CICD%20pipeline.png)
+ 
  ---
 
 ### 5. Project Structure
