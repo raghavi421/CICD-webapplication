@@ -24,10 +24,10 @@ Build a complete CI/CD system that automatically tests, builds, and deploys a si
    * Static HTML-based web application
    * Acts as the user interface for the system
    * Displays:
-           * Application health status
-           * Database connection status
-           * Total record count
-           * Employee data table
+           - Application health status
+           - Database connection status
+           - Total record count
+           - Employee data table
 
  ```
      User Browser
@@ -49,11 +49,11 @@ Render Status & Data in UI
 
 ```
  2. backend
-    * RESTful API developed using Flask
-    * Provides endpoints:
+    - RESTful API developed using Flask
+    - Provides endpoints:
                /health – application health
                /db-status – database status and employee records
-    * Uses environment variables for database connection
+    - Uses environment variables for database connection
 ```
 Frontend Request
       |
@@ -208,13 +208,13 @@ Purpose: Deployment automation.  Usage in Project:
   
   ### Step 1: Clone Repository
 ```
-git clone https://github.com/PavanSPK/cicd-capstone.git
-cd cicd-capstone
+git clone https://github.com/raghavi421/CICD-webapplication.git
+cd CICD-webapplication
 ```
 ### Step 2: Pull Docker Images
 ```
-docker pull spk487/cicd-backend:latest
-docker pull spk487/cicd-frontend:latest
+docker pull praghavi123/backend:latest
+docker pull praghavi123/frontend:latest
 ```
 ### Step 3: Run Application
 ```
