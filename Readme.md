@@ -257,7 +257,7 @@ docker-compose.yml includes:
 - Environment variables for database configuration Docker Compose is used both locally and during deployment to ensure environment consistency.
 
 ---
-### 11. CI/CD Pipeline Using Jenkins
+### 11. CI/CD Pipeline Using Github Actions
 The complete CI/CD workflow is defined in the Jenkinsfile
 
 ### Pipeline Stages:
@@ -270,7 +270,7 @@ The complete CI/CD workflow is defined in the Jenkinsfile
 - Deploy to Staging
 - Manual Approval
 - Deploy to Production
-  ![backup](https://github.com/PavanSPK/Automated_Backup_System_Project/blob/main/test_folder/backup.png)
+  ![CICD FLOW](https://github.com/raghavi421/CICD-webapplication/blob/a9ad12b608b355797841d9b2cd5bce44243f8684/images/CICD%20FLOW.png)
 ---
 
 ### 12. Security Scanning with Trivy
