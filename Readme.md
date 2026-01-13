@@ -223,12 +223,11 @@ docker-compose up -d
 ### Step 4: Verify Application
 
 - Frontend UI: (http://localhost:8080)
-  ![Frontend output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
+  ![Frontend output](https://github.com/raghavi421/CICD-webapplication/blob/704ee52fabdc574a688f7983e841b5852eaa9acd/images/Frontend%20output.png)
 - Backend API: (http://localhost:5000)
-  ![backend output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
+  ![backend output](https://github.com/raghavi421/CICD-webapplication/blob/704ee52fabdc574a688f7983e841b5852eaa9acd/images/backend%20output.png)
 - Health Endpoint: (http://localhost:5000/health)
-  ![healthcheck output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
-
+  ![healthcheck output](https://github.com/raghavi421/CICD-webapplication/blob/704ee52fabdc574a688f7983e841b5852eaa9acd/images/healthcheck%20output.png)
 ### 9. Docker Implementation
 
  **Backend Dockerfile (Highlights)**
