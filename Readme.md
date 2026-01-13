@@ -279,6 +279,10 @@ Trivy is integrated into the pipeline as a mandatory gate.
 - Scans backend image
 - Checks for HIGH and CRITICAL vulnerabilities
 - Pipeline fails immediately if issues are found This step ensures that insecure images are never deployed.
+  ![Travyscan image1](https://github.com/raghavi421/CICD-webapplication/blob/6c3c9b2a1aadd505fdc5345fdaf360521cd11690/images/Travyscan%20image1.png)
+  ![Travyscan image2](https://github.com/raghavi421/CICD-webapplication/blob/6c3c9b2a1aadd505fdc5345fdaf360521cd11690/images/Travyscan%20image%202.png)
+  ![Travyscan image3](https://github.com/raghavi421/CICD-webapplication/blob/6c3c9b2a1aadd505fdc5345fdaf360521cd11690/images/Travyscan%20image%203.png)
+  ![Travyscan image4](https://github.com/raghavi421/CICD-webapplication/blob/6c3c9b2a1aadd505fdc5345fdaf360521cd11690/images/Travyscan%20image4.png)
 ---
 ### 13. Docker Hub Image Registry
 - Backend and frontend images are pushed separately
