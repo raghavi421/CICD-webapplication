@@ -19,15 +19,15 @@ Build a complete CI/CD system that automatically tests, builds, and deploys a si
 ---
 
 ### 3.Application Architecture
----
+
 1. Frontend
    * Static HTML-based web application
    * Acts as the user interface for the system
    * Displays:
-           - Application health status
-           - Database connection status
-           - Total record count
-           - Employee data table
+     - Application health status
+     - Database connection status
+     - Total record count
+     - Employee data table
 
  ```
      User Browser
@@ -51,8 +51,8 @@ Render Status & Data in UI
  2. backend
     - RESTful API developed using Flask
     - Provides endpoints:
-               /health – application health
-               /db-status – database status and employee records
+       - /health – application health
+      - /db-status – database status and employee records
     - Uses environment variables for database connection
 ```
 Frontend Request
@@ -160,19 +160,19 @@ CICD-WEBAPPLICATION
 ### 7.Tools & Technologies Used
 
   ### 1. Github
-      Purpose: Source code management Usage in Project
-       - Stores application source code
-       - Triggers CI/CD pipeline using GitHub actions
+   Purpose: Source code management Usage in Project
+   - Stores application source code
+   - Triggers CI/CD pipeline using GitHub actions
    ### 2. Docker
-      Purpose: Containerization platform Usage in Project
-        - Containerizes frontend, backend, database, and github actions
-        - Ensures consistency across environments
-        - Used in Jenkins pipeline for image build, push, and deployment
+   Purpose: Containerization platform Usage in Project
+   - Containerizes frontend, backend, database, and github actions
+   - Ensures consistency across environments
+   - Used in Jenkins pipeline for image build, push, and deployment
    ### 3. Docker Compose
-Purpose: Multi-container orchestration Usage in Project
-   - Defines frontend, backend, and database services
-   - Creates shared networks and persistent volumes
-   - Used for local development, testing, and deployment
+   Purpose: Multi-container orchestration Usage in Project
+  - Defines frontend, backend, and database services
+  - Creates shared networks and persistent volumes
+  - Used for local development, testing, and deployment
 ### 4. Nginx
 Purpose: Web server.  Usage in Project:
 - Serves static frontend files
@@ -223,9 +223,11 @@ docker-compose up -d
 ### Step 4: Verify Application
 
 - Frontend UI: (http://localhost:8080)
+  ![Frontend output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
 - Backend API: (http://localhost:5000)
+  ![backend output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
 - Health Endpoint: (http://localhost:5000/health)
-
+  ![healthcheck output](https://github.com/raghavi421/CICD-webapplication/blob/cc0c559fce3fe398864f749f7d85761f5c6d7fcb/images/CICD%20pipeline%20flow.png)
 
 ### 9. Docker Implementation
 
