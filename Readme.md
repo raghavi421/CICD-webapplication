@@ -311,7 +311,7 @@ deploy.sh performs:
 - Latest images are pulled from Docker Hub
 - New containers are started using Docker Compose
 - No manual deployment steps are required
-
+```
   Start deploy.sh
      |
      v
